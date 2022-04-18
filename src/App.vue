@@ -1,26 +1,76 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <new-student-form 
+      v-on:student-added="newStudentAdded">
+      </new-student-form>
+
+      <student-table 
+      v-bind:students="students" 
+      v-on:student-arrived-or-left="studentArrivedOrLeft"
+      v-on:delete-student="studentDeleted">
+      </student-table>
+
+      <student-message
+      v-bind:student="mostRecentStudent">
+      </student-message>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import newStudentForm from './components/newStudentForm.vue'
+import studentMessage from './components/studentMessage.vue'
+import studentTable from './components/studentTable.vue'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    newStudentForm, 
+    studentMessage,
+    studentTable
+  },
+  data() {
+    return {
+      students: [],
+      mostRecentStudent: {}
+    }
+  },
+  methods: {
+    newStudentAdded(student) {
+      this.students.push(student)
+      this.students.sort(function(s1, s2) {
+        return s1.name.toLowerCase() < s2.name.toLowerCase() ? -1 : 1
+      })
+    },
+    studentArrivedOrLeft(student, present) {
+      //TODO FIND STUDENT in array of STUDENTS
+      // TODO update present attribute 
+
+      let updateStudent = this.students.find( function(s) {
+        if (s.name === student.name && s.starID === student.StarID){
+          return true
+        }
+      })
+        if (updateStudent) {
+        updateStudent.present = present
+        this.mostRecentStudent = updateStudent
+      }
+    },
+    studentDeleted(student) { //filter returns a new array of all students that return true
+      this.students.filter( function(s){  // rename student deleted
+        if (s != student) {
+          return true
+        }
+      })
+
+      // CLEAR WELCOME AND GOODBYE MESSAGE
+    this.mostRecentStudent = {}
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
 </style>
+  
+
