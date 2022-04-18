@@ -1,4 +1,4 @@
-<template>
+<template id="template">
       <new-student-form 
       v-on:student-added="newStudentAdded">
       </new-student-form>
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       students: [],
-      mostRecentStudent: {}
+      mostRecentStudent: []
     }
   },
   methods: {
@@ -42,8 +42,8 @@ export default {
       })
     },
     studentArrivedOrLeft(student, present) {
-      //TODO FIND STUDENT in array of STUDENTS
-      // TODO update present attribute 
+      // Found STUDENT in array of STUDENTS
+      // updated present attribute 
 
       let updateStudent = this.students.find( function(s) {
         if (s.name === student.name && s.starID === student.StarID){
@@ -56,7 +56,7 @@ export default {
       }
     },
     studentDeleted(student) { //filter returns a new array of all students that return true
-      this.students.filter( function(s){  // rename student deleted
+      this.students=this.students.filter( function(s){  // rename student deleted
         if (s != student) {
           return true
         }
@@ -72,5 +72,6 @@ export default {
 <style>
 @import "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
 </style>
+
   
 

@@ -17,9 +17,9 @@
 
 <script> 
 export default {
-    name: 'StudentMessage',
+    name: 'studentMessage',
     props: {
-        student: Object // create component here
+        student: Object // created component here
     }
     
 }

@@ -49,15 +49,13 @@ export default {
             }
 
             if (this.errors.length == 0) {
-                let student = {name: this.newStudentName, starID: this.newStarID, present: false}
-            }  
+                let student = {name: this.newStudentName, starID: this.newStarID, present: false}  
              // TODO EMIT MESSAGE TO PARENT WITH NEW STUDENT---> APP.VUE
-            this.$emit('student-added', student)
-
-            this.newStudentName = ''  // clear the form
-            this.newStarID = ''
-           
-        },
+                this.$emit('student-added', student)
+                this.newStudentName = ''  // clear the form
+                this.newStarID = ''
+            }
+        }
     }
     // create component here
 }

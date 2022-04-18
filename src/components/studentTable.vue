@@ -35,7 +35,7 @@ export default {
     components: {
         StudentRow
     },
-                //emits: ['student-arrived-or-left'],
+    emits: ['student-arrived-or-left'],
     props: {
         students: Array
     }, 
@@ -47,14 +47,14 @@ export default {
     methods: {
         arrivedOrLeft(student, present) {
 
-            // TODO EMIT MESSAGE TO PARENT
+            // EMIT MESSAGE TO PARENT
             this.$emit('student-arrived-or-left', student, present)
         },
         deleteStudent(student) {
-            this.$emit('delete-student', student)
+            this.$emit('delete-student', student)  //deleting student
         }
     }
-    // create component here
+    // created component here
 }
 </script>
     
